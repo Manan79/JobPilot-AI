@@ -1,0 +1,12 @@
+langgraph
+langchain
+pydantic
+langchain-openai
+openai
+python-dotenv
+langchain_core
+langchain_community
+faiss-cpu
+langchain_groq
+pymupdf
+typing_extensions
