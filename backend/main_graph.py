@@ -107,7 +107,7 @@ English, Hindi """
 
 # result = workflow.steam({'Resume': resume_text, 'JD': job_description})
 
-for step in workflow.stream({'Resume': resume, 'JD': JD}):
-    for node, output in step.items():
-        print(f"\n🔹 Node: {node}")
-        print(output)
+# for step in workflow.stream({'Resume': resume, 'JD': JD}):
+#     for node, output in step.items():
+#         print(f"\n🔹 Node: {node}")
+#         print(output)
