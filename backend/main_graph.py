@@ -26,33 +26,40 @@ graph.add_edge("Cover Letter Generator", END)
 workflow = graph.compile()
 
 
-JD = """ Position: Senior Machine Learning Engineer
-Company: TechCorp AI Solutions
+JD = """
+Role Overview
 
-About the Role:
-We are looking for a Senior Machine Learning Engineer to join our 
-AI team and lead the development of production-grade ML systems.
+We’re looking for a Frontend Engineer who can turn ideas into fast, clean, and intuitive user interfaces. You’ll work closely with backend and AI teams to build products that feel smooth and responsive, not clunky or over-engineered.
 
-Requirements:
-- 5+ years of experience in Machine Learning / Deep Learning
-- Strong proficiency in Python, TensorFlow, PyTorch
-- Experience with MLOps tools (MLflow, Kubeflow, Airflow)
-- Hands-on experience with LLMs, Transformer architectures
-- Experience deploying ML models on AWS/GCP/Azure
-- Strong knowledge of Docker, Kubernetes
-- Experience with distributed training (Horovod, Ray)
-- Proficiency in SQL and NoSQL databases
-- Strong understanding of NLP pipelines
-- Experience leading a team of 3+ engineers
-- Publications or contributions to ML research is a plus
+Key Responsibilities
+Build responsive and user-friendly web interfaces
+Translate UI/UX designs into high-quality code
+Integrate APIs and handle real-time data
+Optimize performance, loading speed, and responsiveness
+Manage state and component architecture effectively
+Ensure cross-browser compatibility
+Collaborate with backend and AI teams for seamless integration
+Required Skills
+Strong JavaScript fundamentals
+Experience with React (preferred) or similar frameworks
+HTML, CSS, and responsive design
+API integration (REST / JSON)
+State management (Context API / Redux)
+Basic understanding of Git and version control
+Good to Have
+Next.js or similar frameworks
+TypeScript
+UI libraries (Tailwind CSS, Material UI)
+Performance optimization techniques
+Basic backend understanding (helps in integration)
+What We Care About
+You write clean, maintainable UI code
+You think about user experience, not just features
+You can debug UI issues without getting stuck
+You care about performance and real-world usability
 
-Responsibilities:
-- Design and deploy scalable ML pipelines
-- Lead a team of junior ML engineers
-- Collaborate with product and data teams
-- Optimize model performance in production
-- Research and implement state-of-the-art ML techniques """
 
+"""
 
 resume = """ Name: Rohit Sharma
 Email: rohit.sharma@email.com
@@ -105,7 +112,7 @@ English, Hindi """
 
 # result = workflow.invoke({'Resume': resume_text, 'JD': job_description})
 
-# result = workflow.steam({'Resume': resume_text, 'JD': job_description})
+# result = workflow.stream({'Resume': resume, 'JD': JD})
 
 # for step in workflow.stream({'Resume': resume, 'JD': JD}):
 #     for node, output in step.items():

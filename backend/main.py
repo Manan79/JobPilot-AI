@@ -41,8 +41,8 @@ class AnalysisResponse(BaseModel):
     advantages: List[str]
     disadvantages: List[str]
     cover_letter: Optional[str] = None
-    feedback: Optional[List[str]] = None
-    verdict: Optional[str] = None
+    feedback: Optional[dict] = None
+    # verdict: Optional[str] = None
 
 def extract_text_from_pdf(file) -> str:
     temp_path = None
@@ -74,22 +74,22 @@ def health_check():
     return {"status": "ok"}
 
 
-@app.post("/api/v1/analyze", response_model=AnalysisResponse)
-def analyze_resume_text(request: AnalyzeRequest):
-    state = {"Resume": request.resume_text, "JD": request.job_description}
-    try:
-        result = workflow.invoke(state)
-    except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Workflow execution failed: {exc}")
+# @app.post("/api/v1/analyze", response_model=AnalysisResponse)
+# def analyze_resume_text(request: AnalyzeRequest):
+#     state = {"Resume": request.resume_text, "JD": request.job_description}
+#     try:
+#         result = workflow.invoke(state)
+#     except Exception as exc:
+#         raise HTTPException(status_code=500, detail=f"Workflow execution failed: {exc}")
 
-    return AnalysisResponse(
-        score=_safe_get(result, "score", 0),
-        advantages=_safe_get(result, "advantages", []),
-        disadvantages=_safe_get(result, "disadvantages", []),
-        cover_letter=_safe_get(result, "cover_letter"),
-        feedback=_safe_get(result, "feedback"),
-        verdict=_safe_get(result, "verdict"),
-    )
+#     return AnalysisResponse(
+#         score=_safe_get(result, "score", 0),
+#         advantages=_safe_get(result, "advantages", []),
+#         disadvantages=_safe_get(result, "disadvantages", []),
+#         cover_letter=_safe_get(result, "cover_letter"),
+#         feedback=_safe_get(result, "feedback"),
+#         verdict=_safe_get(result, "verdict"),
+#     )
 
 
 @app.post("/api/v1/analyze-file", response_model=AnalysisResponse)
@@ -105,13 +105,23 @@ def analyze_resume_file(resume: UploadFile = File(...), job_description: str = F
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Workflow execution failed: {exc}")
 
+    feedback_data = _safe_get(result, "feedback")
+    feedback_dict = None
+    if feedback_data:
+        # Convert Pydantic model to dictionary
+        if hasattr(feedback_data, "model_dump"):
+            feedback_dict = feedback_data.model_dump()
+        elif hasattr(feedback_data, "dict"):
+            feedback_dict = feedback_data.dict()
+        elif isinstance(feedback_data, dict):
+            feedback_dict = feedback_data
+
     return AnalysisResponse(
         score=_safe_get(result, "score", 0),
         advantages=_safe_get(result, "advantages", []),
         disadvantages=_safe_get(result, "disadvantages", []),
         cover_letter=_safe_get(result, "cover_letter"),
-        feedback=_safe_get(result, "feedback"),
-        verdict=_safe_get(result, "verdict"),
+        feedback=feedback_dict,
     )
 
 
@@ -120,4 +130,4 @@ def analyze_resume_file(resume: UploadFile = File(...), job_description: str = F
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main_backend:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

@@ -10,3 +10,7 @@ faiss-cpu
 langchain_groq
 pymupdf
 typing_extensions
+fastapi
+uvicorn
+python-multipart
+langchain_google_genai

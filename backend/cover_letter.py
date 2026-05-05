@@ -32,8 +32,10 @@ Your task is to write a professional and tailored cover letter that:
 3. Subtly handle disadvantages by showing willingness to learn
    or transferable skills where applicable
 4. Close with a confident call-to-action
+
 5. Keep the tone professional yet personable
 6. Length: 3-4 paragraphs, concise and impactful
+7. add nessary line breaks and formatting for readability
 
 ---
 
