@@ -6,8 +6,6 @@ from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 import os
 
-import os
-os.environ.pop("GROQ_API_KEY", None)
 
 load_dotenv()
 
