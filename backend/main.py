@@ -17,7 +17,7 @@ from main_graph import workflow
 
 load_dotenv()
 
-app = FastAPI(title="Resume Analyzer Backend", version="1.0.0")
+app = FastAPI(title="Resume Analyzer Backend")
 
 app.add_middleware(
     CORSMiddleware,
