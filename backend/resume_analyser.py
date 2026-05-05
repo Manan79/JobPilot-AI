@@ -1,4 +1,4 @@
-from main_structure import *
+from backend.main_structure import *
 from typing_extensions import Literal
 
 class ResumeAnalyzer(BaseModel):

@@ -13,7 +13,7 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyMuPDFLoader
 
-from main_graph import workflow
+from backend.main_graph import workflow
 
 load_dotenv()
 

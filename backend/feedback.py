@@ -1,4 +1,4 @@
-from main_structure import *
+from backend.main_structure import *
 from pydantic import BaseModel, Field
 
 
