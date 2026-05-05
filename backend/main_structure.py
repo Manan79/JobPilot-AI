@@ -11,9 +11,6 @@ os.environ.pop("GROQ_API_KEY", None)
 
 load_dotenv()
 
-key = os.getenv("GROQ_API_KEY")
-print(f"Key found: {key[:10]}...") 
-
 class ResumeData(TypedDict):
     JD: str
     Resume: str
