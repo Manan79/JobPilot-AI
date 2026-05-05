@@ -25,7 +25,12 @@ class ResumeData(TypedDict):
 # print(os.getenv("GOOGLE_API_KEY"))
 
 model_openai = ChatOpenAI(model="gpt-4o-mini" , streaming=True, temperature=0.0, api_key=os.getenv("OPENAI_API_KEY"))
-model_groq = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.0 , streaming=True , api_key=os.getenv("GROQ_API_KEY"))
+
 model_google = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.0 , streaming=True, api_key=os.getenv("GOOGLE_API_KEY"))
 
 
+try:
+    model_groq = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.0 , streaming=True , api_key=os.getenv("GROQ_API_KEY"))
+
+except:
+    model_groq = ChatOpenAI(model="gpt-4o-mini" , streaming=True, temperature=0.0, api_key=os.getenv("OPENAI_API_KEY"))
