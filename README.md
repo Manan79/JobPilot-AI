@@ -1,6 +1,6 @@
 # JobPilot-AI 
 
-An intelligent, multi-LLM powered Resume Analyzer backend built with FastAPI and LangGraph. It evaluates resumes against job descriptions, providing match scores, and conditionally generating tailored cover letters or actionable feedback based on the candidate's suitability.
+An intelligent, multi-LLM powered Resume Analyzer with FastAPI backend and React frontend. It evaluates resumes against job descriptions, providing match scores, and conditionally generating tailored cover letters or actionable feedback based on the candidate's suitability.
 
 ## Features
 
@@ -10,15 +10,16 @@ An intelligent, multi-LLM powered Resume Analyzer backend built with FastAPI and
   - **Score >= 75**: Automatically generates a professional, tailored Cover Letter.
   - **Score < 75**: Provides detailed section-by-section feedback and priority actions to improve the resume.
 - **FastAPI Backend**: Exposes RESTful endpoints for easy integration.
+- **React Frontend**: Modern, responsive UI built with Vite, TypeScript, and Shadcn/UI.
 - **PDF Support**: Extract text directly from uploaded PDF resumes using PyMuPDF.
 
 ## Tech Stack
 
-- **Framework**: FastAPI
-- **Workflow / Agents**: LangGraph, Langchain
+- **Backend**: FastAPI, LangGraph, Langchain
+- **Frontend**: React, TypeScript, Vite, Shadcn/UI, Tailwind CSS
 - **Language Models**: OpenAI (Analysis), Groq (Feedback), Google GenAI (Cover Letter)
 - **PDF Parsing**: PyMuPDF (`pymupdf`)
-- **Package Management**: `uv` / `pip` (requires Python >= 3.13)
+- **Package Management**: `uv` / `pip` (Python), `npm` (Node.js)
 
 ## Project Structure
 
@@ -31,10 +32,13 @@ resume-analyser/
 │   ├── resume_analyser.py     # Resume analysis logic (OpenAI)
 │   ├── cover_letter.py        # Cover letter generation (Google GenAI)
 │   └── feedback.py            # Feedback generation (Groq)
-├── main_code/
-│   └── logic_code.ipynb       # Jupyter notebook with experimental logic
-├── pyproject.toml             # Project metadata and dependencies
-└── requirements.txt           # Dependency lockfile
+├── JobPilotAI Frontend/
+│   ├── src/                   # React application source
+│   ├── .env                   # Environment variables (API URL)
+│   ├── vite.config.ts         # Vite configuration
+│   └── package.json           # Node.js dependencies
+├── pyproject.toml             # Python project metadata
+└── requirements.txt           # Python dependencies
 ```
 
 ## Setup & Installation
@@ -69,6 +73,8 @@ resume-analyser/
 
 ## Running the Application
 
+### Backend (Development)
+
 Start the FastAPI development server:
 
 ```bash
@@ -78,6 +84,36 @@ uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
 The API will be available at `http://localhost:8000`.
 You can access the interactive Swagger documentation at `http://localhost:8000/docs`.
+
+### Frontend (Development)
+
+```bash
+cd "JobPilotAI Frontend"
+npm install
+npm run dev
+```
+
+The frontend will be available at `http://localhost:8080`.
+
+### Production Deployment
+
+#### Backend Deployment
+The backend is already deployed at: https://jobpilot-ai-c7ml.onrender.com/docs
+
+#### Frontend Deployment
+1. **Build the frontend:**
+   ```bash
+   cd "JobPilotAI Frontend"
+   npm run build
+   ```
+
+2. **Deploy the `dist` folder** to any static hosting service (Vercel, Netlify, GitHub Pages, etc.)
+
+3. **Environment Configuration:**
+   The frontend is configured to use the live backend API via the `.env` file:
+   ```
+   VITE_API_BASE_URL=https://jobpilot-ai-c7ml.onrender.com
+   ```
 
 ## API Endpoints
 

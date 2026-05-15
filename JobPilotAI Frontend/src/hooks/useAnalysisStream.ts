@@ -75,7 +75,7 @@ export function useAnalysisStream() {
       formData.append("resume", file);
       formData.append("job_description", jobDescription);
 
-      const response = await fetch("/api/v1/analyze-file", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/v1/analyze-file`, {
         method: "POST",
         body: formData,
         signal: ctrl.signal,
